@@ -1,23 +1,31 @@
+# docker-compose.yml
 version: '3'
 
 services:
-  node_a:
+  server:
     build: .
-    container_name: node_a
+    container_name: server
     ports:
-      - "5001:5000"
-    command: ["python", "app.py", "Node_A"]
+      - "5000:5000"
+    command: ["python", "server.py"]
 
-  node_b:
+  client1:
     build: .
-    container_name: node_b
-    ports:
-      - "5002:5000"
-    command: ["python", "app.py", "Node_B"]
+    container_name: client1
+    depends_on:
+      - server
+    command: ["python", "client.py"]
 
-  node_c:
+  client2:
     build: .
-    container_name: node_c
-    ports:
-      - "5003:5000"
-    command: ["python", "app.py", "Node_C"]
+    container_name: client2
+    depends_on:
+      - server
+    command: ["python", "client.py"]
+
+  client3:
+    build: .
+    container_name: client3
+    depends_on:
+      - server
+    command: ["python", "client.py"]

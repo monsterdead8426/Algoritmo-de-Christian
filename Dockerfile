@@ -1,14 +1,15 @@
-# Usa una imagen de Python
+# Dockerfile
 FROM python:3.9
 
-# Copia el programa al contenedor
-COPY app.py /app/app.py
+# Copia los scripts de Python al contenedor
+COPY server.py /app/server.py
+COPY client.py /app/client.py
 
-# Configura el directorio de trabajo
+# Establece el directorio de trabajo
 WORKDIR /app
 
-# Instala Flask (para la comunicación HTTP)
+# Instala las dependencias necesarias
 RUN pip install flask requests
 
-# Ejecuta el programa
-CMD ["python", "app.py"]
+# Comando para ejecutar el servidor por defecto
+CMD ["python", "server.py"]
